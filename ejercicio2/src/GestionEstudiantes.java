@@ -87,11 +87,11 @@ public class GestionEstudiantes {
     public static void main(String[] args) {
         GestionEstudiantes gestion = new GestionEstudiantes();
         
-        gestion.agregarEstudiante(new Estudiante("Ana", 101, 8.5));
+        gestion.agregarEstudiante(new Estudiante("PEPE", 101, 8.5));
         gestion.agregarEstudiante(new Estudiante("Juan", 102, 5.0));
-        gestion.agregarEstudiante(new Estudiante("Pedro", 103, 9.2));
-        gestion.agregarEstudiante(new Estudiante("Lucia", 104, 7.0));
-        gestion.agregarEstudiante(new Estudiante("Marcos", 105, 4.5));
+        gestion.agregarEstudiante(new Estudiante("Nico", 103, 9.2));
+        gestion.agregarEstudiante(new Estudiante("Leandro", 104, 7.0));
+        gestion.agregarEstudiante(new Estudiante("Lucas", 105, 4.5));
 
         System.out.println("Todos los estudiantes:");
         gestion.listarEstudiantes();
