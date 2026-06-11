@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Clase Pedido con atributos cliente, fecha, total y estado.
@@ -18,7 +20,9 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido[cliente=" + cliente + ", fecha=" + fecha + ", total=" + String.format("%.2f", total) + ", estado=" + estado + "]";
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaStr = fecha.format(fmt);
+        return "Pedido[cliente=" + cliente + ", fecha=" + fechaStr + ", total=" + String.format(Locale.US, "%.2f", total) + ", estado=" + estado + "]";
     }
 
     public String getCliente() { return cliente; }

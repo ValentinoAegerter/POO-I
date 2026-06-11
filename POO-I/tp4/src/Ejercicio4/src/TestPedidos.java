@@ -20,6 +20,7 @@ public class TestPedidos {
         );
 
         // 1. Pedidos pendientes recientes
+        // Se filtra por estado PENDIENTE y por fecha dentro de los ultimos 30 dias
         List<Pedido> pendientesRecientes = pedidos.stream()
                 .filter(p -> p.getEstado() == EstadoPedido.PENDIENTE)
                 .filter(p -> p.getFecha().isAfter(LocalDate.now().minusDays(30)))
@@ -29,6 +30,7 @@ public class TestPedidos {
         System.out.println();
 
         // 2. Clientes unicos ordenados
+        // Se mapea a nombre de cliente, se eliminan duplicados y se ordena alfabeticamente
         List<String> clientesUnicos = pedidos.stream()
                 .map(Pedido::getCliente)
                 .distinct()
@@ -38,6 +40,7 @@ public class TestPedidos {
         System.out.println();
 
         // 3. Monto total y promedio por estado
+        // Se agrupa por EstadoPedido y se recoge DoubleSummaryStatistics para cada grupo
         Map<EstadoPedido, DoubleSummaryStatistics> stats = pedidos.stream()
                 .collect(Collectors.groupingBy(Pedido::getEstado, Collectors.summarizingDouble(Pedido::getTotal)));
         System.out.println("Monto total y promedio por estado:");
@@ -45,6 +48,7 @@ public class TestPedidos {
         System.out.println();
 
         // 4. Pedido de mayor monto
+        // Se usa stream().max para obtener el pedido con mayor total y Optional para manejar ausencia
         Optional<Pedido> mayor = pedidos.stream().max((a, b) -> Double.compare(a.getTotal(), b.getTotal()));
         mayor.ifPresentOrElse(
                 p -> System.out.println("Mayor pedido: " + p),
@@ -63,6 +67,7 @@ public class TestPedidos {
         System.out.println();
 
         // 5. Nombres de clientes con pedidos cancelados
+        // Se filtra por estado CANCELADO, se mapea al cliente, se quitan duplicados y se unen con joining
         String cancelados = pedidos.stream()
                 .filter(p -> p.getEstado() == EstadoPedido.CANCELADO)
                 .map(Pedido::getCliente)
